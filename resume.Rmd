@@ -1,5 +1,5 @@
 ---
-title: "p8105_hw4_xt2288"
+title: "Resume"
 output: 
   html_document:
     toc: true
@@ -8,9 +8,7 @@ output:
 ---
 
 
-# Problem 1
 
-This is a [resume](resume.html) link.
 
 
 
