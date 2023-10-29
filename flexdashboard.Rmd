@@ -10,16 +10,26 @@ output:
 library(flexdashboard)
 library(p8105.datasets)
 library(plotly)
+library(tidyverse)
+data("instacart")
 ```
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Number of items ordered in each aisle
 
 ```{r}
+instacart |>
+  group_by(aisle) |>
+  summarize(n_order = n()) |>
+  filter(n_order > 10000) |>
+  arrange(n_order) |>
+  mutate(aisle=factor(aisle, levels=aisle)) |>
+  plot_ly(x = ~n_order, y = ~aisle, type = "bar", colors = "viridis")
 
 ```
+
 
 Column {data-width=350}
 -----------------------------------------------------------------------
@@ -27,12 +37,17 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-
+#instacart |>
+ # plot_ly(y = ~days_since_prior_order ,color = ~product_name, type = "scatter", colors = "viridis")
 ```
 
-### Chart C
+### Order Hour in Each Day
 
 ```{r}
-
+instacart |>
+  select(order_id, order_dow, order_hour_of_day) |>
+  distinct(order_id, .keep_all = TRUE) |>
+  plot_ly(x = ~order_dow, y = ~order_hour_of_day, 
+          type = "box", mode = "markers", alpha = 0.5)
 ```
 
