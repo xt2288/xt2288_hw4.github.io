@@ -33,10 +33,14 @@ ny_noaa |>
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Snowfall(mm) vs. Precipitation(tenths of mm) in 1981
 
 ```{r}
- # plot_ly(y = ~days_since_prior_order ,color = ~product_name, type = "scatter", colors = "viridis")
+ny_noaa |>
+  filter(date < "1982-01-01",
+         snow > 0) |>
+  plot_ly(
+    x = ~snow, y = ~prcp, type = "scatter", mode = "markers", alpha = 0.5)
 ```
 
 ### Snowfall(mm) in 1981 snow days
